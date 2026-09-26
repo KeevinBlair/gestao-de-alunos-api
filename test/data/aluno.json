@@ -1,0 +1,11 @@
+{
+  "nome": "Aluno Teste",
+  "email": "aluno.teste@example.com",
+  "matricula": "2026999",
+  "senha": "123456",
+  "disciplinaId": "disciplina-programacao-web",
+  "trabalho": {
+    "titulo": "Trabalho de Teste de API",
+    "descricao": "Entrega realizada através dos testes automatizados."
+  }
+}
