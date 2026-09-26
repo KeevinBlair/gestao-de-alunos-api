@@ -1,29 +1,35 @@
 import asyncHandler from '../utils/asyncHandler.js';
-import * as trabalhosService from '../services/trabalhos.service.js';
+import {
+  listar as listarService,
+  buscarPorId as buscarPorIdService,
+  corrigir as corrigirService,
+  remover as removerService,
+  registrar as registrarService,
+} from '../services/trabalhos.service.js';
 
 export const listar = asyncHandler(async (req, res) => {
   const { alunoId, disciplinaId, status } = req.query;
-  res.json(trabalhosService.listar({ alunoId, disciplinaId, status }));
+  res.json(await listarService({ alunoId, disciplinaId, status }));
 });
 
 export const buscarPorId = asyncHandler(async (req, res) => {
-  res.json(trabalhosService.buscarPorId(req.params.id));
+  res.json(await buscarPorIdService(req.params.id));
 });
 
 export const corrigir = asyncHandler(async (req, res) => {
-  res.json(trabalhosService.corrigir(req.params.id, req.body));
+  res.json(await corrigirService(req.params.id, req.body));
 });
 
 export const remover = asyncHandler(async (req, res) => {
-  trabalhosService.remover(req.params.id);
+  await removerService(req.params.id);
   res.status(204).send();
 });
 
 export const registrar = asyncHandler(async (req, res) => {
-  const trabalho = trabalhosService.registrar(req.params.alunoId, req.body);
+  const trabalho = await registrarService(req.params.alunoId, req.body);
   res.status(201).json(trabalho);
 });
 
 export const listarPorAluno = asyncHandler(async (req, res) => {
-  res.json(trabalhosService.listar({ alunoId: req.params.alunoId }));
+  res.json(await listarService({ alunoId: req.params.alunoId }));
 });
